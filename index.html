@@ -1,609 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Afitr</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFITR</title>
 
-    html {
-      scroll-behavior: smooth;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(59,130,246,0.16), transparent 28%),
-        radial-gradient(circle at top right, rgba(168,85,247,0.12), transparent 22%),
-        linear-gradient(180deg, #050816 0%, #09101d 48%, #070c16 100%);
-      color: #fff;
-    }
+body {
+  background: #0b0f1a;
+  color: white;
+}
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+/* 顶部导航 */
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(20px);
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+}
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+/* 左上角品牌 */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-    .container {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-    }
+.logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
 
-    .nav {
-      width: min(1180px, calc(100% - 32px));
-      margin: 20px auto 0;
-      padding: 16px 20px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(8, 12, 22, 0.72);
-      backdrop-filter: blur(14px);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 16px;
-      z-index: 20;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.22);
-    }
+.brand-text {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      font-size: 21px;
-      letter-spacing: 0.3px;
-    }
+/* 右侧菜单 */
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
 
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 30px rgba(37,99,235,0.32);
-      font-weight: 800;
-    }
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+.nav-links a:hover {
+  color: white;
+}
 
-    .nav-links a {
-      color: #cbd5e1;
-      font-size: 14px;
-      transition: 0.2s ease;
-    }
+/* 下载按钮 */
+.nav-btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: white;
+  color: black;
+  font-weight: 600;
+}
 
-    .nav-links a:hover {
-      color: #fff;
-    }
+/* 首页大图 */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
 
-    .nav-btn {
-      padding: 10px 16px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #fff;
-      font-size: 14px;
-      transition: 0.2s ease;
-    }
+.hero img {
+  width: 60%;
+  max-width: 800px;
+  opacity: 0.9;
+}
 
-    .nav-btn:hover {
-      background: rgba(255,255,255,0.1);
-      transform: translateY(-1px);
-    }
+/* 标题 */
+.hero-text {
+  position: absolute;
+  bottom: 120px;
+  text-align: center;
+}
 
-    .hero {
-      padding: 56px 0 40px;
-    }
+.hero-text h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      align-items: center;
-      gap: 40px;
-      min-height: calc(100vh - 150px);
-    }
+.hero-text p {
+  color: rgba(255,255,255,0.6);
+}
 
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 13px;
-      color: #dbeafe;
-      background: rgba(59,130,246,0.1);
-      border: 1px solid rgba(59,130,246,0.22);
-    }
+/* 下载按钮（中间） */
+.download-btn {
+  margin-top: 20px;
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: white;
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
 
-    .hero h1 {
-      margin: 22px 0 14px;
-      font-size: clamp(48px, 7vw, 88px);
-      line-height: 0.96;
-      letter-spacing: -2px;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(90deg, #fff, #93c5fd, #c4b5fd);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      max-width: 640px;
-      margin: 0;
-      color: #94a3b8;
-      font-size: 18px;
-      line-height: 1.75;
-    }
-
-    .hero-actions {
-      margin-top: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .primary-btn,
-    .secondary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 16px 24px;
-      border-radius: 16px;
-      font-size: 16px;
-      font-weight: 600;
-      transition: 0.22s ease;
-    }
-
-    .primary-btn {
-      color: #fff;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      box-shadow: 0 14px 40px rgba(59,130,246,0.26);
-    }
-
-    .primary-btn:hover {
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 18px 46px rgba(59,130,246,0.34);
-    }
-
-    .secondary-btn {
-      color: #e2e8f0;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .secondary-btn:hover {
-      background: rgba(255,255,255,0.08);
-      transform: translateY(-2px);
-    }
-
-    .hero-note {
-      margin-top: 14px;
-      color: #64748b;
-      font-size: 14px;
-    }
-
-    .hero-art-wrap {
-      position: relative;
-    }
-
-    .glow-1,
-    .glow-2 {
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(56px);
-      z-index: -1;
-    }
-
-    .glow-1 {
-      width: 180px;
-      height: 180px;
-      background: rgba(59,130,246,0.22);
-      top: 20px;
-      right: 0;
-    }
-
-    .glow-2 {
-      width: 180px;
-      height: 180px;
-      background: rgba(139,92,246,0.18);
-      bottom: 10px;
-      left: 0;
-    }
-
-    .hero-art-card {
-      border-radius: 28px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.3);
-    }
-
-    .hero-art-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      min-height: 560px;
-    }
-
-    .section {
-      padding: 48px 0;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: clamp(32px, 4vw, 46px);
-      letter-spacing: -1px;
-      margin: 0 0 14px;
-    }
-
-    .section-subtitle {
-      max-width: 760px;
-      margin: 0 auto 38px;
-      text-align: center;
-      color: #94a3b8;
-      font-size: 17px;
-      line-height: 1.75;
-    }
-
-    .brand-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .brand-card {
-      padding: 24px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: 0.22s ease;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.16);
-    }
-
-    .brand-card:hover {
-      transform: translateY(-4px);
-      background: rgba(255,255,255,0.055);
-    }
-
-    .brand-card h3 {
-      margin: 0 0 10px;
-      font-size: 22px;
-    }
-
-    .brand-card p {
-      margin: 0;
-      color: #94a3b8;
-      line-height: 1.75;
-      font-size: 15px;
-    }
-
-    .product-panel {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: 0.88fr 1.12fr;
-      gap: 24px;
-      padding: 26px;
-      border-radius: 30px;
-      background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(124,58,237,0.08));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 70px rgba(0,0,0,0.2);
-    }
-
-    .product-visual {
-      padding: 28px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .product-visual img {
-      width: 100%;
-      max-width: 360px;
-      border-radius: 24px;
-      box-shadow: 0 18px 44px rgba(0,0,0,0.26);
-    }
-
-    .product-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .product-label {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 12px;
-      color: #dbeafe;
-      background: rgba(59,130,246,0.12);
-      border: 1px solid rgba(59,130,246,0.22);
-      width: fit-content;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .product-info h3 {
-      margin: 0 0 12px;
-      font-size: clamp(30px, 4vw, 48px);
-      letter-spacing: -1px;
-    }
-
-    .product-info p {
-      margin: 0;
-      color: #94a3b8;
-      font-size: 17px;
-      line-height: 1.8;
-    }
-
-    .product-list {
-      margin: 22px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 12px;
-    }
-
-    .product-list li {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #dbeafe;
-      font-size: 15px;
-    }
-
-    .product-actions {
-      margin-top: 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .download-box {
-      padding: 34px;
-      border-radius: 30px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 70px rgba(0,0,0,0.22);
-      text-align: center;
-    }
-
-    .download-box h2 {
-      margin: 0 0 12px;
-      font-size: clamp(30px, 4vw, 42px);
-    }
-
-    .download-box p {
-      max-width: 760px;
-      margin: 0 auto;
-      color: #94a3b8;
-      line-height: 1.8;
-      font-size: 16px;
-    }
-
-    .download-actions {
-      margin-top: 28px;
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .footer {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 24px 0 36px;
-      color: #64748b;
-      font-size: 14px;
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-      border-top: 1px solid rgba(255,255,255,0.07);
-    }
-
-    @media (max-width: 1024px) {
-      .hero-grid,
-      .product-panel {
-        grid-template-columns: 1fr;
-      }
-
-      .brand-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-art-card img {
-        min-height: 420px;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding-top: 34px;
-      }
-
-      .hero-grid {
-        min-height: auto;
-      }
-
-      .section {
-        padding: 34px 0;
-      }
-    }
-  </style>
+.download-btn:hover {
+  transform: scale(1.05);
+}
+</style>
 </head>
+
 <body>
-  <nav class="nav">
-    <div class="brand">
-  <img src="afitr-logo.jpg" class="logo">
-  <div>Afitr</div>
+
+<!-- 顶部 -->
+<nav class="nav">
+  <div class="brand">
+    <img src="afitr-logo.jpg" class="logo">
+    <div class="brand-text">AFITR</div>
   </div>
 
-    <div class="nav-links">
-      <a href="#brand">Brand</a>
-      <a href="#products">Products</a>
-      <a href="#download">Download</a>
-      <a class="nav-btn" href="https://github.com/AfitrPro/Afitrpro.github.io/releases/latest/download/GeNvAmIXwAAgW-6.jpeg">Afitr-T Demo</a>
-    </div>
-  </nav>
+  <div class="nav-links">
+    <a href="#">Brand</a>
+    <a href="#">Products</a>
+    <a href="#">Download</a>
+    <a class="nav-btn" href="https://github.com/AfitrPro/Afitrpro.github.io/releases/download/1.0/GeNvAmIXwAAgW-6.jpeg" download>
+      Download
+    </a>
+  </div>
+</nav>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="hero-tag">Afitr Universe · Brand IP · Product Platform</div>
-          <h1>
-            A brand built
-            <br />
-            <span>for the paths others ignore.</span>
-          </h1>
-          <p>
-            Afitr is the main brand. It is not just one application, but a larger creative and product IP.
-            Every branch leads to a different possibility. Afitr chooses the roads others do not build.
-          </p>
+<!-- 主视觉 -->
+<section class="hero">
+  <!-- 你的IP大图 -->
+  <img src="afitr-ip.jpeg">
 
-          <div class="hero-actions">
-            <a class="primary-btn" href="#products">Explore Products</a>
-            <a class="secondary-btn" href="#download">Download Afitr-T</a>
-          </div>
+  <div class="hero-text">
+    <h1>AFITR</h1>
+    <p>Next Generation Real-Time Language Intelligence</p>
 
-          <div class="hero-note">
-            Afitr-T is the realtime speech translation product under the Afitr brand.
-          </div>
-        </div>
+    <!-- 下载 -->
+    <a class="download-btn"
+       href="https://github.com/AfitrPro/Afitrpro.github.io/releases/download/1.0/GeNvAmIXwAAgW-6.jpeg"
+       download>
+       Download Afitr-T
+    </a>
+  </div>
+</section>
 
-        <div class="hero-art-wrap">
-          <div class="glow-1"></div>
-          <div class="glow-2"></div>
-          <div class="hero-art-card">
-            <img src="afitr-ip.jpeg" alt="Afitr IP artwork">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="brand">
-      <div class="container">
-        <h2 class="section-title">The Afitr Identity</h2>
-        <p class="section-subtitle">
-          Afitr stands for branching possibilities. It is a creative system, a visual IP,
-          and a platform for products that go where others stop.
-        </p>
-
-        <div class="brand-grid">
-          <div class="brand-card">
-            <h3>Brand First</h3>
-            <p>
-              The website should present Afitr as the core identity, not as a single utility page.
-              This gives the brand more scale, memory, and long-term value.
-            </p>
-          </div>
-
-          <div class="brand-card">
-            <h3>Art + Product</h3>
-            <p>
-              Afitr combines an artistic visual world with usable technology products.
-              The IP image creates recognition before the user even reaches the download button.
-            </p>
-          </div>
-
-          <div class="brand-card">
-            <h3>Expandable Universe</h3>
-            <p>
-              Afitr-T is only one branch. Later you can place more Afitr products here without redesigning the brand structure.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="products">
-      <div class="container">
-        <h2 class="section-title">Products Under Afitr</h2>
-        <p class="section-subtitle">
-          The first visible product in the Afitr lineup is Afitr-T, a realtime speech translation experience.
-        </p>
-
-        <div class="product-panel">
-          <div class="product-visual">
-            <img src="afitr-t-icon.png" alt="Afitr-T icon">
-          </div>
-
-          <div class="product-info">
-            <div class="product-label">Product 01</div>
-            <h3>Afitr-T</h3>
-            <p>
-              Afitr-T is Afitr’s realtime speech translation product. It is built for instant understanding,
-              cleaner speech-to-text flow, and a faster translation experience on desktop.
-            </p>
-
-            <ul class="product-list">
-              <li>Realtime speech translation</li>
-              <li>Product under the Afitr master brand</li>
-              <li>Designed to become the first public branch of the Afitr ecosystem</li>
-            </ul>
-
-            <div class="product-actions">
-              <a class="primary-btn" href="https://github.com/AfitrPro/Afitrpro.github.io/releases/latest/download/GeNvAmIXwAAgW-6.jpeg">
-                ⬇ Download Afitr-T
-              </a>
-              <a class="secondary-btn" href="#download">Go to Download Section</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="download">
-      <div class="container">
-        <div class="download-box">
-          <h2>Download Afitr-T</h2>
-          <p>
-            This download currently points to your test release file. Later, keep the same structure and only replace the release asset with the official Afitr-T package.
-          </p>
-
-          <div class="download-actions">
-            <a class="primary-btn" href="https://github.com/AfitrPro/Afitrpro.github.io/releases/latest/download/GeNvAmIXwAAgW-6.jpeg">
-              ⬇ Download Demo
-            </a>
-            <a class="secondary-btn" href="#brand">Back to Brand</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div>© 2026 Afitr. All rights reserved.</div>
-    <div>Afitr-T is a product under the Afitr brand.</div>
-  </footer>
 </body>
 </html>
